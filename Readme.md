@@ -10,8 +10,12 @@
 ## Dataset :- 
 Collected data from a camera mounted on car, which takes pictures of the road ahead every few seconds.
 
+
+
+
+
 <center>
-<video width="400" height="200" src="nb_images/road_video_compressed2.mp4" type="video/mp4" controls>
+<video width="400" height="200" src="https://user-images.githubusercontent.com/72977734/204974094-2e1ec84b-6df9-4ee9-b955-2117c153f17f.mp4" type="video/mp4" controls>
 </video>
 </center>
 
@@ -20,7 +24,10 @@ Collected data from a camera mounted on car, which takes pictures of the road ah
 
  Gathered all these images into a folder and labelled them by drawing bounding boxes around every car  found. Here's an example of what  bounding boxes look like:
 
- <img src="nb_images/box_label.png" style="width:500px;height:250;">
+
+<img width="830" alt="box_label" src="https://user-images.githubusercontent.com/72977734/204974445-eff11d4e-d8e2-4d60-8c8b-5d97f5260072.png">
+
+
 
 
  ## YOLO
@@ -39,8 +46,11 @@ Anchor boxes are chosen by exploring the training data to choose reasonable heig
 
 #### Encoding
  What this encoding represents. 
+ 
+ 
+ <img width="824" alt="architecture" src="https://user-images.githubusercontent.com/72977734/204974620-b495b28a-ab31-4514-a617-6a579941d517.png">
 
- <img src="nb_images/architecture.png" style="width:700px;height:400;">
+ 
 
  <caption><center> <u><b> Figure 2 </u></b>: Encoding architecture for YOLO<br> </center></caption>
 
@@ -48,7 +58,11 @@ Anchor boxes are chosen by exploring the training data to choose reasonable heig
 
 For simplicity, you'll flatten the last two dimensions of the shape (19, 19, 5, 85) encoding, so the output of the Deep CNN is (19, 19, 425).
 
-<img src="nb_images/flatten.png" style="width:700px;height:400;">
+
+<img width="791" alt="flatten" src="https://user-images.githubusercontent.com/72977734/204974727-23136d19-7fb2-4183-9f1d-a0e9ebcd27b7.png">
+
+
+
 
 <caption><center> <u><b> Figure 3 </u></b>: Flattening the last two last dimensions<br> </center></caption>
 
@@ -58,7 +72,9 @@ For simplicity, you'll flatten the last two dimensions of the shape (19, 19, 5, 
 Now, for each box (of each cell) you'll compute the following element-wise product and extract a probability that the box contains a certain class.  
 The class score is $score_{c,i} = p_{c} \times c_{i}$: the probability that there is an object $p_{c}$ times the probability that the object is a certain class $c_{i}$.
 
-<img src="nb_images/probability_extraction.png" style="width:700px;height:400;">
+<img width="825" alt="probability_extraction" src="https://user-images.githubusercontent.com/72977734/204974954-523e5b52-bbf0-497f-85de-9cf0d9f2b08b.png">
+
+
 
 <caption><center> <u><b>Figure 4</u></b>: Find the class detected by each box<br> </center></caption>
 
@@ -71,14 +87,19 @@ Here's one way to visualize what YOLO is predicting on an image:
 
 Doing this results in this picture: 
 
-<img src="nb_images/proba_map.png" style="width:300px;height:300;">
+
+<img width="691" alt="proba_map" src="https://user-images.githubusercontent.com/72977734/204975079-140da382-addd-4ec2-966a-4b5a9ea7e0ce.png">
+
+
 <caption><center> <u><b>Figure 5</u></b>: Each one of the 19x19 grid cells is colored according to which class has the largest predicted probability in that cell.<br> </center></caption>
 
 
 #### Visualizing bounding boxes
 Another way to visualize YOLO's output is to plot the bounding boxes that it outputs. Doing that results in a visualization like this:  
 
-<img src="nb_images/anchor_map.png" style="width:200px;height:200;">
+
+<img width="452" alt="anchor_map" src="https://user-images.githubusercontent.com/72977734/204975239-fadcf13d-58fb-48e8-a3f7-204582884a36.png">
+
 <caption><center> <u><b>Figure 6</u></b>: Each cell gives you 5 boxes. In total, the model predicts: 19x19x5 = 1805 boxes just by looking once at the image (one forward pass through the network)! Different colors denote different classes. <br> </center></caption>
 
 #### Non-Max suppression
@@ -90,7 +111,10 @@ To do so, you'll use **non-max suppression**. Specifically, you'll carry out the
 
 Even after filtering by thresholding over the class scores, you still end up with a lot of overlapping boxes. A second filter for selecting the right boxes is called non-maximum suppression (NMS). 
 
-<img src="nb_images/non-max-suppression.png" style="width:500px;height:400;">
+<img width="779" alt="non-max-suppression" src="https://user-images.githubusercontent.com/72977734/204975359-cef80581-1092-48c0-87f2-6df0c4bf1abf.png">
+
+
+
 
 <caption><center> <u> <b>Figure 7</b> </u>: In this example, the model has predicted 3 cars, but it's actually 3 predictions of the same car. Running non-max suppression (NMS) will select only the most accurate (highest probability) of the 3 boxes. <br> </center></caption>
 
@@ -101,10 +125,16 @@ Non-max suppression uses the very important function called **"Intersection over
 
 ## Test YOLO Pre-trained Model on Images
 
-<center>
-<video width="400" height="200" src="nb_images/pred_video_compressed2.mp4" type="video/mp4" controls>
-</video>
-</center>
+
+
+https://user-images.githubusercontent.com/72977734/204975470-49966ff1-1601-4979-98db-e2e928474821.mp4
+
+
+
+
+
+
+
 
 <caption><center> Predictions of the YOLO model on pictures taken from a camera while driving around the Silicon Valley <br> 
 
